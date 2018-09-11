@@ -50,7 +50,7 @@
 	var filter = input.value.toUpperCase();
 				
 	for (i = 1; i < tr.length; i++){
-	    var td = tr[i].getElementsByTagName('td')[0];
+	    var td = tr[i].getElementsByTagName('td');
 	    if (td){
 	        if (td.innerHTML.toUpperCase().indexOf(filter) > -1){
 	        tr[i].style.display = "";
