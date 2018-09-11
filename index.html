@@ -49,7 +49,7 @@
 	var tr = document.getElementsByTagName('tr');
 	var filter = input.value.toUpperCase();
 				
-	for (i = 0; i < tr.length; i++){
+	for (i = 1; i < tr.length; i++){
 	    var td = tr[i].getElementsByTagName('td')[0];
 	    if (td){
 	        if (td.innerHTML.toUpperCase().indexOf(filter) > -1){
