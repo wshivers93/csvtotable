@@ -1,13 +1,47 @@
-//var csv is the CSV file with headers
-function csvJSON(csv){
+<!DOCTYPE html>
+<html lang="en">
+    <head>	
+	<script type="text/javascript">
+	    function displayData(json){
+		console.log(json)
+		var pre_html = '<table id = "salesData"><tr><th>Name</th><th>Address</th>\
+			       <th>Status</th><th>Points</th></tr><tbody>';
+			
+	        var actual_html='';
+			
+	        var post_html = '</tbody></table>'
+			
+	        var len = json.feed.entry.length
+				
+		for (var i=0; i<len; i++){
+		    actual_html += [
+		    '<tr><td>',
+		    json.feed.entry[i].gsx$name.$t,
+		    '</td>',
+		    '<td>',
+		    json.feed.entry[i].gsx$address.$t,
+		    '</td>',
+		    '<td>',
+		    json.feed.entry[i].gsx$status.$t,
+	            '</td>',
+		    '<td>',
+		    json.feed.entry[i].gsx$points.$t,
+		    '</td></tr>'
+	            ].join('');
+		}
+		document.getElementById('table_container').innerHTML = pre_html + actual_html + post_html
+	}
+		
+	//var csv is the CSV file with headers
+        function csvJSON(csv){
 
-  var lines=csv.split("\n");
+        var lines=csv.split("\n");
 
-  var result = [];
+        var result = [];
 
-  var headers=lines[0].split(",");
+        var headers=lines[0].split(",");
 
-  for(var i=1;i<lines.length;i++){
+        for(var i=1;i<lines.length;i++){
 
 	  var obj = {};
 	  var currentline=lines[i].split(",");
@@ -18,8 +52,52 @@ function csvJSON(csv){
 
 	  result.push(obj);
 
-  }
+          }
   
-  //return result; //JavaScript object
-  return JSON.stringify(result); //JSON
-}
+          //return result; //JavaScript object
+          var content = JSON.stringify(result); //JSON
+     }
+	</script>
+	   
+	<style>
+           table, th, td{
+	       border: 1px solid black;
+	       border-collapse: collapse;
+	   }
+           th{
+	       padding: 5px;	   
+           }
+	   td{
+	       padding: 15px;
+	       text-align: center;
+	   }
+	</style>
+</head>
+<body style="overflow: hidden">
+    <input id="searchBox" type="text" placeholder="Search Sellers..." onkeyup="searchFunc()">
+    <br>
+    <br>
+
+    <div id="table_container"></div>
+    
+    <script type="text/javascript">
+        function searchFunc(){
+	var table = document.getElementById('table_container');
+	var input = document.getElementById('searchBox');
+	var tr = table.getElementsByTagName('tr');
+	var filter = input.value.toUpperCase();
+				
+	for (i = 0; i < tr.length; i++){
+	    var td = tr[i].getElementsByTagName('td')[0];
+	    if (td){
+	        if (td.innerHTML.toUpperCase().indexOf(filter) > -1){
+	        tr[i].style.display = "";
+	    } else {
+	        tr[i].style.display = "none";
+	    }
+	    }
+        }
+	}
+    </script>
+</body>
+</html>
