@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>	
+	 $.ajax({
+        type: "GET",
+        url: "TestSheet.csv",
+        dataType: "text",
+        success: function(csv) {
+        console.log("SUCCESS")
+        }
+	})
 	<script type="text/javascript">
 	    function displayData(json){
 		console.log(json)
@@ -32,14 +40,7 @@
 		document.getElementById('table_container').innerHTML = pre_html + actual_html + post_html
 	}
 		
-	$.ajax({
-        type: "GET",
-        url: "TestSheet.csv",
-        dataType: "text",
-        success: function(csv) {
-        console.log("SUCCESS")
-        }
-	})
+	
 		
 	//var csv is the CSV file with headers
         function csvJSON(csv){
