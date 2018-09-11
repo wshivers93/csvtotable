@@ -33,8 +33,8 @@
 	}
 		
 	var fileReader = new FileReader();
-        function getFile(TestSheet.csv) {
-            let file = inputFile.files[0];
+        function getFile(TestSheet) {
+            let file = TestSheet.files[0];
             fileReader.readAsText(file);
         }
         function readFile(evt) {
