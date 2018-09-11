@@ -32,14 +32,12 @@
 		document.getElementById('table_container').innerHTML = pre_html + actual_html + post_html
 	}
 		
-	var fileReader = new FileReader();
-        function getFile(TestSheet) {
-            let file = TestSheet.files[0];
-            fileReader.readAsText(file);
-        }
-        function readFile(evt) {
-            let parsed = csvJSON(evt.target.result);
-            return parsed;
+	$.ajax({
+        type: "GET",
+        url: "TestSheet.csv",
+        dataType: "text",
+        success: function(csv) {
+        console.log("SUCCESS")
         }	
 		
 	//var csv is the CSV file with headers
@@ -65,7 +63,7 @@
           }
   
           //return result; //JavaScript object
-          var content = JSON.stringify(result); //JSON
+          return JSON.stringify(result); //JSON
      }
 	</script>
 	   
