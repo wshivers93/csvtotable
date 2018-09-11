@@ -1,75 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>	
-	<script type="text/javascript">
-	    function displayData(json){
-		console.log(json)
-		var pre_html = '<table id = "salesData"><tr><th>Name</th><th>Address</th>\
-			       <th>Status</th><th>Points</th></tr><tbody>';
-			
-	        var actual_html='';
-			
-	        var post_html = '</tbody></table>'
-			
-	        var len = json.feed.entry.length
-				
-		for (var i=0; i<len; i++){
-		    actual_html += [
-		    '<tr><td>',
-		    json.feed.entry[i].gsx$name.$t,
-		    '</td>',
-		    '<td>',
-		    json.feed.entry[i].gsx$address.$t,
-		    '</td>',
-		    '<td>',
-		    json.feed.entry[i].gsx$status.$t,
-	            '</td>',
-		    '<td>',
-		    json.feed.entry[i].gsx$points.$t,
-		    '</td></tr>'
-	            ].join('');
-		}
-		document.getElementById('table_container').innerHTML = pre_html + actual_html + post_html
-	}
-		
-	$(document).ready(function(){
-	    $.ajax({
-            type: "GET",
-            url: "TestSheet.csv",
-            dataType: "text",
-            success: function(csv) {
-            console.log("SUCCESS")
-            }
-	    });
-        });
-		
-	//var csv is the CSV file with headers
-        function csvJSON(csv){
-
-        var lines=csv.split("\n");
-
-        var result = [];
-
-        var headers=lines[0].split(",");
-
-        for(var i=1;i<lines.length;i++){
-
-	  var obj = {};
-	  var currentline=lines[i].split(",");
-
-	  for(var j=0;j<headers.length;j++){
-		  obj[headers[j]] = currentline[j];
-	  }
-
-	  result.push(obj);
-
-          }
-  
-          //return result; //JavaScript object
-          return JSON.stringify(result); //JSON
-     }
-	</script>
-	   
 	<style>
            table, th, td{
 	       border: 1px solid black;
@@ -90,6 +21,26 @@
     <br>
 
     <div id="table_container"></div>
+	
+    <script src="d3.min.js?v=3.2.8"></script>
+
+        <script type="text/javascript"charset="utf-8">
+            d3.text("TestSheet.csv", function(data) {
+                var parsedCSV = d3.csv.parseRows(data);
+
+                var container = d3.select("body")
+                    .append("table")
+
+                    .selectAll("tr")
+                        .data(parsedCSV).enter()
+                        .append("tr")
+
+                    .selectAll("td")
+                        .data(function(d) { return d; }).enter()
+                        .append("td")
+                        .text(function(d) { return d; });
+            });
+        </script>
     
     <script type="text/javascript">
         function searchFunc(){
