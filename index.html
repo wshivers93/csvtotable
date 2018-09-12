@@ -52,7 +52,7 @@
 	for (i = 1; i < tr.length; i++){
 	    //var td = tr[i].getElementsByTagName('td')[2];
 	    //if (td){
-	        if (tr.innerHTML.toUpperCase().indexOf(filter) > -1){
+	    if (tr.textContent.toUpperCase().indexOf(filter) > -1){
 	        tr[i].style.display = "";
 	    } else {
 	        tr[i].style.display = "none";
