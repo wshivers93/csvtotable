@@ -47,17 +47,18 @@
 	var table = document.getElementsByTagName('table');
 	var input = document.getElementById('searchBox');
 	var tr = document.getElementsByTagName('tr');
+	var tds = tr.getElementsByTagName('td');
 	var filter = input.value.toUpperCase();
 				
 	for (i = 1; i < tr.length; i++){
-	    var td = tr[i].getElementsByTagName('td')[2]
-	    if (td){
-	        if (td.innerHTML.toUpperCase().indexOf(filter) > -1){
-	            tr[i].style.display = "";
-	        } else {
-	            tr[i].style.display = "none";
-	        }
-	    }
+	    //var td = tr[i].getElementsByTagName('td')[2]
+	    var col = tds[2].textContent.toUpperCase();
+	    if (col.indexOf(filter) > -1){
+	        tr[i].style.display = "";
+	    } else {
+	        tr[i].style.display = "none";
+            }
+	    
         }
 	}
     </script>
