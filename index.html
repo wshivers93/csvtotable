@@ -51,12 +51,13 @@
 				
 	for (i = 1; i < tr.length; i++){
 	    var td = tr[i].getElementsByTagName('td')[2]
-	    if (td.textContent.indexOf(filter) > -1){
-	        tr[i].style.display = "";
-	    } else {
-	        tr[i].style.display = "none";
-            }
-	    
+	    if(td){
+	        if (td.textContent.indexOf(filter) > -1){
+	            tr[i].style.display = "";
+	        } else {
+	            tr[i].style.display = "none";
+                }
+	    }
         }
 	}
     </script>
