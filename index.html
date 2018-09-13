@@ -46,8 +46,8 @@
         function searchFunc(){
 	var table = document.getElementsByTagName('table');
 	var input = document.getElementById('searchBox');
-	var tr = table.getElementsByTagName('tr').value;
-	var tds = tr.getElementsByTagName('td').value;
+	var tr = table.tr;
+	var tds = tr.td;
 	var filter = input.value.toUpperCase();
 				
 	for (i = 1; i < tr.length; i++){
