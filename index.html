@@ -44,10 +44,10 @@
     
     <script type="text/javascript">
         function searchFunc(){
-	var table = document.getElementById('table');
+	var table = document.getElementsByTagName('table');
 	var input = document.getElementById('searchBox');
-	var tr = table.getElementsByTagName('tr');
-	var tds = tr.getElementsByTagName('td');
+	var tr = table.getElementsByTagName('tr').value;
+	var tds = tr.getElementsByTagName('td').value;
 	var filter = input.value.toUpperCase();
 				
 	for (i = 1; i < tr.length; i++){
